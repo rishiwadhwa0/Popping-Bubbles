@@ -1,0 +1,1 @@
+-Looking into some libraries that can recognize pitch. I tried using an Aubio example project that I found online on this forum: https://forum.openframeworks.cc/t/pitch-detection/3807/2 but there are some build errors.
