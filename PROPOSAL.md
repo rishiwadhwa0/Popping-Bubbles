@@ -6,6 +6,7 @@ What I'd like to do:
 
 -If the user survives the whole song without ever having 6 circles (or whatever number I eventually decide) ever be on the screen at the same time, he or she wins the game. Otherwise, the user will experience a loss, probably receiving a score of how many circles he or she popped, for example (or some other measurment of score if I find something better).
 
+-The reason I want to do this game is because I love games like Fruit Ninja and Dance Dance Revolution and so I decided this would be a cool combination of the two. 
 
 What I think I will need to accomplish the project:
 
