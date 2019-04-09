@@ -1,3 +1,3 @@
 -I have experimented with the example included in the ofxJSON addon for reading and writing files. So far, I have successfully been able to use it to parse some sample json files they gave using string streams. The program then draws the data from the stringstream to an openframeworks window.
 
--As for the clicking portion of my game, I experiemented with clicking circles and changing the color each time the circle is pressed within its area using the ofx draw functions. I imagine creating circle objects for my game with radius, and time-to-draw fiels and using these object properties to draw them properly. 
+-As for the clicking portion of my game, I experiemented with clicking circles and changing the color each time the circle is pressed within its area using the ofx draw functions. I imagine creating circle objects for my game with radius and time-to-draw fields and using these object properties to draw them properly. 
