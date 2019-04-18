@@ -39,6 +39,8 @@ void ofApp::draw()
 	
 	for (Bubble bubble : bubbles) {
 		ss << bubble;
+		ofSetColor(bubble.getColor());
+		ofDrawCircle(bubble.getX(), bubble.getY(), bubble.getRadius());
 	}
 
 	ofDrawBitmapString(ss.str(), 10, 14);
