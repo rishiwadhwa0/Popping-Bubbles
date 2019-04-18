@@ -1,6 +1,8 @@
 #include "ofApp.h"
+#include "../Bubble.h"
 #include <vector> 
 #include <list>
+#include <stdlib.h>
 
 void ofApp::setup()
 {
@@ -15,13 +17,16 @@ void ofApp::setup()
 
 	for (Json::ArrayIndex i = 0; i < result["circles"].size(); ++i)
 	{
-		std::vector<double> circlesData;
-		circlesData.push_back(result["circles"][i]["radius"].asDouble());
-		circlesData.push_back(result["circles"][i]["color"].asDouble());
+		int radius = result["circles"][i]["radius"].asInt();
+		int color = result["circles"][i]["color"].asInt();
+
 		for (auto t : result["circles"][i]["times"]) {
-			circlesData.push_back(t.asDouble());
+			int randomX = rand() % ofGetWidth();
+			int randomY = rand() % ofGetHeight();
+			float time = t.asFloat();
+			Bubble b(randomX, randomY, radius, color, time);
+			bubbles.push_back(b);
 		}
-		circles.push_back(circlesData);
 	}
 }
 
@@ -32,11 +37,8 @@ void ofApp::draw()
     ofSetHexColor(0x00FF00);
     std::stringstream ss;
 	
-	for (auto timeList : circles) {
-		for (auto t : timeList) {
-			ss << t << ", ";
-		}
-		ss << "\n";
+	for (Bubble bubble : bubbles) {
+		ss << bubble;
 	}
 
 	ofDrawBitmapString(ss.str(), 10, 14);

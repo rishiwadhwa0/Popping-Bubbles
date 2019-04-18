@@ -1,11 +1,12 @@
 #include "Bubble.h"
 
-Bubble::Bubble(int setX, int setY, int setSize, int setColor)
+Bubble::Bubble(int setX, int setY, int setSize, int setColor, float setTime)
 {
 	x = setX;
 	y = setY;
 	radius = setSize;
 	color = setColor;
+	time = setTime;
 }
 
 int Bubble::getX()
@@ -26,4 +27,16 @@ int Bubble::getRadius()
 int Bubble::getColor()
 {
 	return color;
+}
+
+float Bubble::getTime()
+{
+	return time;
+}
+
+std::ostream& operator<< (std::ostream &out, Bubble &bubble) {
+	out << "X: " << bubble.getX() << ", Y: " << bubble.getY() << ", ";
+	out << "Radius: " << bubble.getRadius() << ", Color: " << bubble.getColor() << ", ";
+	out << "Time: " << bubble.getTime() << "\n";
+	return out;
 }

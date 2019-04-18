@@ -9,3 +9,5 @@
 -Seems like for drawBitString() there's no way to change the font. I will have to work with small text size for testing. 
 
 -Have decided to keep the parsing in the setup since I only need to do this once. However, to draw the bubbles I will use the draw or update methods.
+
+-For organizing my data, I have decided to go for a vector that stores a bunch of bubbles.
