@@ -1,5 +1,6 @@
 #include "ofApp.h"
-
+#include <vector> 
+#include <list>
 
 void ofApp::setup()
 {
@@ -49,7 +50,27 @@ void ofApp::draw()
     ofSetHexColor(0x00FF00);
 
     std::stringstream ss;
+	std::vector<vector<double>> circles;
+	for (Json::ArrayIndex i = 0; i < result["circles"].size(); ++i)
+	{
+		std::vector<double> times;
+		for (auto t : result["circles"][i]["times"]) {
+			times.push_back(t.asDouble());
+		}
+		circles.push_back(times);
+	}
 
+	for (auto timeList : circles) {
+		for (auto t : timeList) {
+			ss << t << ", ";
+		}
+		ss << "\n";
+	}
+
+	ofDrawBitmapString(ss.str(), 10, 14);
+
+
+/*
 //    {
 //        "firstName": "John",
 //        "lastName": "Smith",
@@ -92,6 +113,6 @@ void ofApp::draw()
     ss << "phoneNumber:type   = " << result["phoneNumber"][i+1]["type"].asString() << std::endl;
     ss << "phoneNumber:number = " << result["phoneNumber"][i+1]["number"].asString() << std::endl;
 
-    ofDrawBitmapString(ss.str(), 10, 14);
+*/
 
 }
