@@ -1,5 +1,5 @@
--Looking into some libraries that can recognize pitch. I tried using an Aubio example project that I found online on this forum: https://forum.openframeworks.cc/t/pitch-detection/3807/2 but there are some build errors.
+-I downloaded the ofxJSON add-on (link is in my proposal) and simply put it int he addons folder in my openframeworks directory.
 
--I have ditched my previous idea of pitch detection since I have found a more interesting project idea to work on which requires the of sound library and shapes. I have followed a youtube tutorial, https://www.youtube.com/watch?v=IiTsE7P-GDs, on audio visualization, which I have got to work on my own laptop. I experimented with things such as only displaying the shape with large beats (not the tiny ones) since I only want the large beats for my game.
+-I have experimented with the examples included in the ofxJSON addon for reading and writing files. So far, I have successfully been able to use it to parse some sample json files they gave using string streams. The program then draws the data from the stringstream to an openframeworks window.
 
--As for the clicking potion of my game, I experiemented with clicking circles and changing the color each time the circle is pressed within it's area. I imagine creating circle objects for my game with their center x and y values as fields. 
+-As for the clicking portion of my game, I experiemented with clicking circles and changing the color each time the circle is pressed within its area using the ofx draw functions. I imagine creating circle objects for my game with radius and time-to-draw fields and using these object properties to draw them properly. 
