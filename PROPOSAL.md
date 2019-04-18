@@ -8,6 +8,8 @@ What I'd like to do:
 
 -The reason I want to do this game is because I love games like Fruit Ninja and Dance Dance Revolution in which you have to be focused and react quickly, and this game is somewhat similar to those games. This game also seems like something that I could turn into an IOS app and release on the app store later on. 
 
+-A stretch goals would be to add in some user interface so that the user can select how fast he wants to scale the timings by. Another one would be that the circles could move on the screen.
+
 Background I have:
 
 -I don't have any technical background with creating games of this sort, but I know what a JSON file is from the assignments in CS 126, and I believe that I can use the general problem solving skills that I have learned so far from this class to to implement code for this project. However, I do have some background knowledge in the sense that I used to play a lot of games like Fruit Ninja, Dance Dance Revolution, Traffic Rush (my high score is like 900-something I think), and honestly the only thing that I ever liked about taking eye exams is that I got to play this game that tests my peripheral vision that's kind of like that game that I want to build (except you have to stare at the center of the screen). 
