@@ -1,5 +1,6 @@
 #include "ofApp.h"
 #include "Bubble.h"
+
 #include <vector> 
 #include <list>
 #include <stdlib.h>
@@ -26,23 +27,35 @@ void ofApp::setup() {
 			gm.addBubble(b);
 		}
 	}
-
 	gm.sortBubbles();
+
+	startTime = ofGetElapsedTimef();
+	ofSetBackgroundAuto(false);
 }
 
 
 void ofApp::draw() {
-    ofBackground(255);
-    ofSetHexColor(0x00FF00);
-    std::stringstream ss;
-	
-	
+	ofSetHexColor(0x00FF00);
+	std::stringstream ss;
+
+	/*
 	for (Bubble bubble : gm.getBubblesList()) {
 		ss << bubble;
 		ofSetColor(bubble.getColor());
 		ofDrawCircle(bubble.getX(), bubble.getY(), bubble.getRadius());
 	}
-	
+
 
 	ofDrawBitmapString(ss.str(), 10, 14);
+	*/
+
+	std::deque<Bubble> bubbles = gm.getBubblesList();
+	if (bubbles.size() > 0) {
+		Bubble bubble = bubbles[0];
+		if (ofGetElapsedTimef() - startTime >= bubble.getTime()) {
+			ofSetColor(bubble.getColor());
+			ofDrawCircle(bubble.getX(), bubble.getY(), bubble.getRadius());
+			gm.removeFirstBubble();
+		}
+	}
 }

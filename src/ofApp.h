@@ -12,6 +12,7 @@ class ofApp: public ofBaseApp
 {
 	ofxJSONElement result;
 	GameModel gm;
+	float startTime;
 
 	public:
 		void setup();

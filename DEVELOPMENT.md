@@ -19,3 +19,7 @@ Update: Implemented work-around by using ../Bubble.h for the include statement
 Update: Apparently Visual Studio doesn't autodetect that you have changed directories. You must remove the file from the project and re-add it. It works now.
 
 -Due to the my need from removing the first elements of the bubbles list, I will be switching from using a vector to a deque (never used this before, but I'll give it a shot!).
+
+-Circles are being drawn, but don't stay on the screen!
+Update: Discovered ofSetBackground(false) but still didn't work.
+Update: I believe I have discovered a real bug with OpenFrameworks. The setBackroundAuto shows a darkened screen with everything blacked out if you're displaying a fullscreen window. I have fixed this problem by displaying a 1000x1000 window.
