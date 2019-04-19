@@ -17,3 +17,5 @@
 -Not exactly sure why Visual Studio is not building properly. I cut and pasted classes into the source directory, and now it's not working.
 Update: Implemented work-around by using ../Bubble.h for the include statement
 Update: Apparently Visual Studio doesn't autodetect that you have changed directories. You must remove the file from the project and re-add it. It works now.
+
+-Due to the my need from removing the first elements of the bubbles list, I will be switching from using a vector to a deque (never used this before, but I'll give it a shot!).

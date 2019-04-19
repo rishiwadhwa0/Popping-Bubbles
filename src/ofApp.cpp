@@ -4,8 +4,7 @@
 #include <list>
 #include <stdlib.h>
 
-void ofApp::setup()
-{
+void ofApp::setup() {
     std::string file = "example.json";
 	// Now parse the JSON
 	bool parsingSuccessful = result.open(file);
@@ -15,8 +14,7 @@ void ofApp::setup()
         ofLogError("ofApp::setup")  << "Failed to parse JSON" << endl;
     }
 
-	for (Json::ArrayIndex i = 0; i < result["circles"].size(); ++i)
-	{
+	for (Json::ArrayIndex i = 0; i < result["circles"].size(); ++i) {
 		int radius = result["circles"][i]["radius"].asInt();
 		int color = result["circles"][i]["color"].asInt();
 
@@ -25,22 +23,21 @@ void ofApp::setup()
 			int randomY = rand() % ofGetHeight();
 			float time = t.asFloat();
 			Bubble b(randomX, randomY, radius, color, time);
-			bubbles.push_back(b);
+			gm.addBubble(b);
 		}
 	}
 
-	std::sort(bubbles.begin(), bubbles.end());
+	gm.sortBubbles();
 }
 
 
-void ofApp::draw()
-{
+void ofApp::draw() {
     ofBackground(255);
     ofSetHexColor(0x00FF00);
     std::stringstream ss;
 	
 	
-	for (Bubble bubble : bubbles) {
+	for (Bubble bubble : gm.getBubblesList()) {
 		ss << bubble;
 		ofSetColor(bubble.getColor());
 		ofDrawCircle(bubble.getX(), bubble.getY(), bubble.getRadius());

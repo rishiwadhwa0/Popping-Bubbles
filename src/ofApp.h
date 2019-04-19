@@ -2,16 +2,18 @@
 #include "ofMain.h"
 #include "ofxJSON.h"
 #include "Bubble.h"
+#include "GameModel.h"
 
+#include <deque>
 #include <vector> 
 #include <list>
 
 class ofApp: public ofBaseApp
 {
-public:
-    void setup();
-    void draw();
+	ofxJSONElement result;
+	GameModel gm;
 
-    ofxJSONElement result;
-	std::vector<Bubble> bubbles;
+	public:
+		void setup();
+		void draw();
 };
