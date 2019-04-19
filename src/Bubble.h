@@ -16,4 +16,8 @@ class Bubble {
 		int getColor();
 		float getTime();
 		friend std::ostream& operator<< (std::ostream &out, Bubble &bubble);
+		friend bool operator> (Bubble &b1, Bubble &b2);
+		friend bool operator<= (Bubble &b1, Bubble &b2);
+		friend bool operator< (Bubble &b1, Bubble &b2);
+		friend bool operator>= (Bubble &b1, Bubble &b2);
 };

@@ -1,7 +1,7 @@
 #pragma once
 #include "ofMain.h"
 #include "ofxJSON.h"
-#include "../Bubble.h"
+#include "Bubble.h"
 
 #include <vector> 
 #include <list>

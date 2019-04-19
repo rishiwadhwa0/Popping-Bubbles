@@ -11,3 +11,9 @@
 -Have decided to keep the parsing in the setup since I only need to do this once. However, to draw the bubbles I will use the draw or update methods.
 
 -For organizing my data, I have decided to go for a vector that stores a bunch of bubbles.
+
+-I think in terms of best design practice, I will overload the comparison operator to be able to sort my list using the best sorting algorithms that come with the standard library. 
+
+-Not exactly sure why Visual Studio is not building properly. I cut and pasted classes into the source directory, and now it's not working.
+Update: Implemented work-around by using ../Bubble.h for the include statement
+Update: Apparently Visual Studio doesn't autodetect that you have changed directories. You must remove the file from the project and re-add it. It works now.

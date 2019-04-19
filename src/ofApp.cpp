@@ -1,5 +1,5 @@
 #include "ofApp.h"
-#include "../Bubble.h"
+#include "Bubble.h"
 #include <vector> 
 #include <list>
 #include <stdlib.h>
@@ -28,20 +28,24 @@ void ofApp::setup()
 			bubbles.push_back(b);
 		}
 	}
+
+	std::sort(bubbles.begin(), bubbles.end());
 }
 
 
 void ofApp::draw()
 {
-    ofBackground(0);
+    ofBackground(255);
     ofSetHexColor(0x00FF00);
     std::stringstream ss;
+	
 	
 	for (Bubble bubble : bubbles) {
 		ss << bubble;
 		ofSetColor(bubble.getColor());
 		ofDrawCircle(bubble.getX(), bubble.getY(), bubble.getRadius());
 	}
+	
 
 	ofDrawBitmapString(ss.str(), 10, 14);
 }

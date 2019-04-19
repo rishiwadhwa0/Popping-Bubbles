@@ -40,3 +40,23 @@ std::ostream& operator<< (std::ostream &out, Bubble &bubble) {
 	out << "Time: " << bubble.getTime() << "\n";
 	return out;
 }
+
+bool operator>(Bubble & b1, Bubble & b2)
+{
+	return b1.getTime() > b2.getTime();
+}
+
+bool operator<=(Bubble & b1, Bubble & b2)
+{
+	return b1.getTime() <= b2.getTime();
+}
+
+bool operator<(Bubble & b1, Bubble & b2)
+{
+	return b1.getTime() < b2.getTime();
+}
+
+bool operator>=(Bubble & b1, Bubble & b2)
+{
+	return b1.getTime() >= b2.getTime();
+}
