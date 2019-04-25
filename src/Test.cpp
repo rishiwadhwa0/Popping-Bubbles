@@ -46,3 +46,14 @@ TEST_CASE("test removing a bubble mechanism") {
 	REQUIRE(bubbles[0].getTime() == 2);
 	REQUIRE(bubbles[1].getTime() == 1);
 }
+
+TEST_CASE("test removing a bubble not in list") {
+	GameModel gm;
+	gm.addScreenBubble(Bubble(1, 1, 1, 1, 2));
+	gm.addScreenBubble(Bubble(2, 2, 2, 2, 3));
+	gm.addScreenBubble(Bubble(2, 2, 2, 2, 1));
+	REQUIRE(gm.removeAScreenBubble(-1) == false);
+	REQUIRE(gm.removeAScreenBubble(3) == false);
+	std::deque<Bubble> bubbles = gm.getScreenBubblesList();
+	REQUIRE(bubbles.size() == 3);
+}

@@ -12,11 +12,12 @@ void GameModel::removeFirstBubble() {
 	bubbles.pop_front();
 }
 
-void GameModel::removeAScreenBubble(int pos) {
+bool GameModel::removeAScreenBubble(int pos) {
 	if (pos < 0 || pos > screenBubbles.size() - 1) {
-		return;
+		return false;
 	}
 	screenBubbles.erase(screenBubbles.begin() + pos);
+	return true;
 }
 
 void GameModel::sortBubbles() {
