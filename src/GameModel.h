@@ -15,7 +15,7 @@ class GameModel {
 		void addBubble(Bubble toAdd);
 		void addScreenBubble(Bubble toAdd);
 		void removeFirstBubble();
-		void removeFirstScreenBubble();
+		void removeAScreenBubble(int pos);
 		void sortBubbles();
 		std::deque<Bubble> getBubblesList();
 		std::deque<Bubble> getScreenBubblesList();

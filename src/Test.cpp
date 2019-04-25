@@ -18,7 +18,7 @@ TEST_CASE("test adding bubble to screen and removing") {
 	gm.addScreenBubble(Bubble(1, 1, 1, 1, 1));
 	std::deque<Bubble> sBubbles = gm.getScreenBubblesList();
 	REQUIRE(sBubbles.size() == 1);
-	gm.removeFirstScreenBubble();
+	gm.removeAScreenBubble(0);
 	sBubbles = gm.getBubblesList();
 	REQUIRE(sBubbles.size() == 0);
 }
@@ -33,4 +33,16 @@ TEST_CASE("test sorting mechanism") {
 	for (int i = 1; i < bubbles.size(); i++) {
 		REQUIRE(bubbles[i].getTime() >= bubbles[i - 1].getTime());
 	}
+}
+
+TEST_CASE("test removing a bubble mechanism") {
+	GameModel gm;
+	gm.addScreenBubble(Bubble(1, 1, 1, 1, 2));
+	gm.addScreenBubble(Bubble(2, 2, 2, 2, 3));
+	gm.addScreenBubble(Bubble(2, 2, 2, 2, 1));
+	gm.removeAScreenBubble(1); //removes bubble with time = 3
+	std::deque<Bubble> bubbles = gm.getScreenBubblesList();
+	REQUIRE(bubbles.size() == 2);
+	REQUIRE(bubbles[0].getTime() == 2);
+	REQUIRE(bubbles[1].getTime() == 1);
 }

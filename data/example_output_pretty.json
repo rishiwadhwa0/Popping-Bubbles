@@ -1,0 +1,16 @@
+{
+   "circles" : [
+      {
+         "color" : 255,
+         "radius" : 100,
+         "times" : [ 0.5, 5, 7, 9, 15 ]
+      },
+      {
+         "color" : 0,
+         "radius" : 10,
+         "times" : [ 2, 6, 8, 11 ]
+      }
+   ],
+   "timeDuration" : 15
+}
+

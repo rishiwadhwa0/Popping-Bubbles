@@ -15,6 +15,10 @@ void ofApp::setup() {
         ofLogError("ofApp::setup")  << "Failed to parse JSON" << endl;
     }
 
+	verdana.load("verdana.ttf", FONT_SIZE, true, true);
+	verdana.setLineHeight(34.0f);
+	verdana.setLetterSpacing(1.035);
+
 	for (Json::ArrayIndex i = 0; i < result["circles"].size(); ++i) {
 		int radius = result["circles"][i]["radius"].asInt();
 		int color = result["circles"][i]["color"].asInt();
@@ -30,6 +34,7 @@ void ofApp::setup() {
 	gm.sortBubbles();
 
 	startTime = ofGetElapsedTimef();
+	ofBackground(0, 0, 0);
 	ofSetBackgroundAuto(false);
 }
 
@@ -38,16 +43,17 @@ void ofApp::draw() {
 	ofSetHexColor(0x00FF00);
 	std::stringstream ss;
 
-	/*
-	for (Bubble bubble : gm.getBubblesList()) {
-		ss << bubble;
-		ofSetColor(bubble.getColor());
-		ofDrawCircle(bubble.getX(), bubble.getY(), bubble.getRadius());
+	if (gm.getScreenBubblesList().size() > MAX_SCREEN_BUBBLES) {
+		printGameOver();
+		gameEnded = true;
+		return;
 	}
 
-
-	ofDrawBitmapString(ss.str(), 10, 14);
-	*/
+	if (gm.getBubblesList().size() == 0 && gm.getScreenBubblesList().size() == 0) {
+		printWin();
+		gameEnded = true;
+		return;
+	}
 
 	std::deque<Bubble> bubbles = gm.getBubblesList();
 	if (bubbles.size() > 0) {
@@ -55,7 +61,54 @@ void ofApp::draw() {
 		if (ofGetElapsedTimef() - startTime >= bubble.getTime()) {
 			ofSetColor(bubble.getColor());
 			ofDrawCircle(bubble.getX(), bubble.getY(), bubble.getRadius());
-			gm.removeFirstBubble();
+			gm.addScreenBubble(bubble); //adds the current bubble to GM's screenBubble list
+			gm.removeFirstBubble(); //removes the bubble from GM's total bubble list
 		}
 	}
+}
+
+void ofApp::mousePressed(int x, int y, int button) {
+	if (gameEnded) {
+		return;
+	}
+	std::deque<Bubble> bubbles = gm.getScreenBubblesList();
+	for (int i = bubbles.size() - 1; i >= 0; i--) {
+		Bubble bubble = bubbles[i];
+		int bR = bubble.getRadius();
+		int bX = bubble.getX();
+		int bY = bubble.getY();
+		if (std::abs(x - bX) <= bR && std::abs(y - bY) <= bR) {
+			ofSetColor(0,0,0);
+			ofDrawCircle(bubble.getX(), bubble.getY(), bubble.getRadius());
+			gm.removeAScreenBubble(i);
+			numBubblesPopped++;
+		}
+	}
+}
+
+void ofApp::printGameOver() {
+	verdana.drawString(GAME_OVER_MESSAGE,
+		PADDING,
+		PADDING + FONT_SIZE);
+	string bubblesPopped = std::to_string(numBubblesPopped) + " BUBBLES";
+	verdana.drawString(bubblesPopped,
+		PADDING,
+		PADDING + 3 * FONT_SIZE);
+	string numBubblesLeft = "YOU HAD " +
+		std::to_string(gm.getBubblesList().size() + MAX_SCREEN_BUBBLES + 1) + 
+		" BUBBLES LEFT";
+	verdana.drawString(numBubblesLeft,
+		PADDING,
+		PADDING + 5 * FONT_SIZE);
+}
+
+void ofApp::printWin() {
+	verdana.drawString(YOU_WIN_MESSAGE,
+		PADDING,
+		PADDING + FONT_SIZE);
+	string bubblesPopped = std::to_string(numBubblesPopped) + " BUBBLES";
+	verdana.drawString(bubblesPopped,
+		PADDING,
+		PADDING + 3 * FONT_SIZE);
+	return;
 }

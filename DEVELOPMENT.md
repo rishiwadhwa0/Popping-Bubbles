@@ -23,3 +23,6 @@ Update: Apparently Visual Studio doesn't autodetect that you have changed direct
 -Circles are being drawn, but don't stay on the screen!
 Update: Discovered ofSetBackground(false) but still didn't work.
 Update: I believe I have discovered a real bug with OpenFrameworks. The setBackroundAuto shows a darkened screen with everything blacked out if you're displaying a fullscreen window. I have fixed this problem by displaying a 1000x1000 window.
+Update: My code moderator has told me I can use OF_GAME_MODE, but is still glitchy.
+
+-I couldn't find anything available to dynamically center font. Personally, I like the text in the top left anyways. 
