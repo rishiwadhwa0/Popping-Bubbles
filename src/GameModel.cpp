@@ -24,6 +24,11 @@ void GameModel::sortBubbles() {
 	std::sort(bubbles.begin(), bubbles.end());
 }
 
+void GameModel::clearEverything() {
+	bubbles.clear();
+	screenBubbles.clear();
+}
+
 std::deque<Bubble> GameModel::getBubblesList() {
 	std::deque<Bubble> bubblesCopy = bubbles;
 	return bubblesCopy;

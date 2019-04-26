@@ -17,6 +17,7 @@ class GameModel {
 		void removeFirstBubble();
 		bool removeAScreenBubble(int pos);
 		void sortBubbles();
+		void clearEverything();
 		std::deque<Bubble> getBubblesList();
 		std::deque<Bubble> getScreenBubblesList();
 };

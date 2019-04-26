@@ -6,34 +6,19 @@
 #include <stdlib.h>
 
 void ofApp::setup() {
-    std::string file = "example.json";
-	// Now parse the JSON
-	bool parsingSuccessful = result.open(file);
-	if (parsingSuccessful) {
-        ofLogNotice("ofApp::setup") << result.getRawString();
-    } else {
-        ofLogError("ofApp::setup")  << "Failed to parse JSON" << endl;
-    }
-
+	//json setup
+	setUpParseJson();
+ 
+	//font setup
 	verdana.load("verdana.ttf", FONT_SIZE, true, true);
 	verdana.setLineHeight(34.0f);
 	verdana.setLetterSpacing(1.035);
 
-	for (Json::ArrayIndex i = 0; i < result["circles"].size(); ++i) {
-		int radius = result["circles"][i]["radius"].asInt();
-		int color = result["circles"][i]["color"].asInt();
-
-		for (auto t : result["circles"][i]["times"]) {
-			int randomX = rand() % ofGetWidth();
-			int randomY = rand() % ofGetHeight();
-			float time = t.asFloat();
-			Bubble b(randomX, randomY, radius, color, time);
-			gm.addBubble(b);
-		}
-	}
-	gm.sortBubbles();
-
-	//startTime = ofGetElapsedTimef();
+	//setup new game data
+	gm.clearEverything();
+	numBubblesPopped = 0;
+	
+	//setup background
 	ofBackground(0, 0, 0);
 	ofSetBackgroundAuto(false);
 }
@@ -41,6 +26,7 @@ void ofApp::setup() {
 
 void ofApp::draw() {
 	ofSetHexColor(0x00FF00);
+
 	if (!gameStarted) {
 		printWelcomeScreen();
 		return;
@@ -74,6 +60,7 @@ void ofApp::mousePressed(int x, int y, int button) {
 	if (gameEnded || !gameStarted) {
 		return;
 	}
+
 	std::deque<Bubble> bubbles = gm.getScreenBubblesList();
 	for (int i = bubbles.size() - 1; i >= 0; i--) {
 		Bubble bubble = bubbles[i];
@@ -99,10 +86,14 @@ void ofApp::printGameOver() {
 		PADDING + 3*FONT_SIZE);
 	string numBubblesLeft = "YOU HAD " +
 		std::to_string(gm.getBubblesList().size() + MAX_SCREEN_BUBBLES + 1) + 
-		" BUBBLES LEFT";
+		" BUBBLES LEFT.";
 	verdana.drawString(numBubblesLeft,
 		PADDING,
 		PADDING + 5*FONT_SIZE);
+	verdana.drawString("Press the space-bar to try-again.",
+		PADDING,
+		PADDING + 7*FONT_SIZE);
+
 }
 
 void ofApp::printWin() {
@@ -113,7 +104,9 @@ void ofApp::printWin() {
 	verdana.drawString(bubblesPopped,
 		PADDING,
 		PADDING + 3*FONT_SIZE);
-	return;
+	verdana.drawString("Press the space-bar to try-again.",
+		PADDING,
+		PADDING + 5*FONT_SIZE);
 }
 
 void ofApp::printWelcomeScreen() {
@@ -127,9 +120,46 @@ void ofApp::printWelcomeScreen() {
 }
 
 void ofApp::keyPressed(int key) {
+	//START GAME
 	if (key == OF_KEY_SPACE && !gameStarted) {
 		gameStarted = true;
+		loadJson();
 		startTime = ofGetElapsedTimef();
 		ofBackground(0, 0, 0);
 	}
+
+	//GO TO WELCOME SCREEN
+	if (key == OF_KEY_SPACE && gameEnded) {
+		gameStarted = false;
+		gameEnded = false;
+		setup();
+	}
+}
+
+void ofApp::setUpParseJson() {
+	std::string file = "gameJSON.json";
+	// Now parse the JSON
+	bool parsingSuccessful = result.open(file);
+	if (parsingSuccessful) {
+		ofLogNotice("ofApp::setup") << result.getRawString();
+	}
+	else {
+		ofLogError("ofApp::setup") << "Failed to parse JSON" << endl;
+	}
+}
+
+void ofApp::loadJson() {
+	for (Json::ArrayIndex i = 0; i < result["circles"].size(); ++i) {
+		int radius = result["circles"][i]["radius"].asInt();
+		int color = result["circles"][i]["color"].asInt();
+
+		for (auto t : result["circles"][i]["times"]) {
+			int randomX = rand() % ofGetWidth();
+			int randomY = rand() % ofGetHeight();
+			float time = t.asFloat();
+			Bubble b(randomX, randomY, radius, color, time);
+			gm.addBubble(b);
+		}
+	}
+	gm.sortBubbles();
 }

@@ -34,4 +34,6 @@ class ofApp: public ofBaseApp
 		void printGameOver();
 		void printWin();
 		void printWelcomeScreen();
+		void setUpParseJson();
+		void loadJson();
 };
