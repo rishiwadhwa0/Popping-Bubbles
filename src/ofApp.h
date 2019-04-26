@@ -19,13 +19,19 @@ class ofApp: public ofBaseApp
 	int numBubblesPopped = 0;
 	string const GAME_OVER_MESSAGE = "GAME OVER. YOU POPPED:";
 	string const YOU_WIN_MESSAGE = "YOU WIN!!! YOU POPPED:";
+	string const WELCOME_MESSAGE = "~BUBBLEZ~";
+	string const WELCOME_MESSAGE2 = "Press the space-bar to continue.";
 	int const PADDING = 15;
 	bool gameEnded = false;
+	bool gameStarted = false;
+	const int OF_KEY_SPACE = 32;
 
 	public:
 		void setup();
 		void draw();
 		void mousePressed(int x, int y, int button);
+		void keyPressed(int key);
 		void printGameOver();
 		void printWin();
+		void printWelcomeScreen();
 };

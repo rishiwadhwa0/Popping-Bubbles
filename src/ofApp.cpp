@@ -33,7 +33,7 @@ void ofApp::setup() {
 	}
 	gm.sortBubbles();
 
-	startTime = ofGetElapsedTimef();
+	//startTime = ofGetElapsedTimef();
 	ofBackground(0, 0, 0);
 	ofSetBackgroundAuto(false);
 }
@@ -41,7 +41,10 @@ void ofApp::setup() {
 
 void ofApp::draw() {
 	ofSetHexColor(0x00FF00);
-	std::stringstream ss;
+	if (!gameStarted) {
+		printWelcomeScreen();
+		return;
+	}
 
 	if (gm.getScreenBubblesList().size() > MAX_SCREEN_BUBBLES) {
 		printGameOver();
@@ -68,7 +71,7 @@ void ofApp::draw() {
 }
 
 void ofApp::mousePressed(int x, int y, int button) {
-	if (gameEnded) {
+	if (gameEnded || !gameStarted) {
 		return;
 	}
 	std::deque<Bubble> bubbles = gm.getScreenBubblesList();
@@ -93,13 +96,13 @@ void ofApp::printGameOver() {
 	string bubblesPopped = std::to_string(numBubblesPopped) + " BUBBLES";
 	verdana.drawString(bubblesPopped,
 		PADDING,
-		PADDING + 3 * FONT_SIZE);
+		PADDING + 3*FONT_SIZE);
 	string numBubblesLeft = "YOU HAD " +
 		std::to_string(gm.getBubblesList().size() + MAX_SCREEN_BUBBLES + 1) + 
 		" BUBBLES LEFT";
 	verdana.drawString(numBubblesLeft,
 		PADDING,
-		PADDING + 5 * FONT_SIZE);
+		PADDING + 5*FONT_SIZE);
 }
 
 void ofApp::printWin() {
@@ -109,6 +112,24 @@ void ofApp::printWin() {
 	string bubblesPopped = std::to_string(numBubblesPopped) + " BUBBLES";
 	verdana.drawString(bubblesPopped,
 		PADDING,
-		PADDING + 3 * FONT_SIZE);
+		PADDING + 3*FONT_SIZE);
 	return;
+}
+
+void ofApp::printWelcomeScreen() {
+	ofSetHexColor(0x00FF00);
+	verdana.drawString(WELCOME_MESSAGE,
+		PADDING,
+		PADDING + FONT_SIZE);
+	verdana.drawString(WELCOME_MESSAGE2,
+		PADDING,
+		PADDING + 3*FONT_SIZE);
+}
+
+void ofApp::keyPressed(int key) {
+	if (key == OF_KEY_SPACE && !gameStarted) {
+		gameStarted = true;
+		startTime = ofGetElapsedTimef();
+		ofBackground(0, 0, 0);
+	}
 }
