@@ -41,3 +41,5 @@ if (not bad) {
 }
 
 -My friend who actually does game dev. told me to consider adding sond to my game, since that avoids awkward sildence. I think I will put sounds when a bubble comes up on the screen and when you pop the bubbles. 
+
+-instead of using the two boolean GameStarted and GameEnded, I have refactored my code to use three enums (WelcomeScreen, GameScreen, and EndScreen). I believe this is much more clean and easy to understand, and I don't have to toggle different booleans on and off every time I need to update my gamestate!

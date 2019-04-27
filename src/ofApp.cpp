@@ -27,20 +27,22 @@ void ofApp::setup() {
 void ofApp::draw() {
 	ofSetHexColor(0x00FF00);
 
-	if (!gameStarted) {
+	if (gameState == WelcomeScreen) {
 		printWelcomeScreen();
 		return;
 	}
 
 	if (gm.getScreenBubblesList().size() > MAX_SCREEN_BUBBLES) {
 		printGameOver();
-		gameEnded = true;
+		//gameEnded = true;
+		gameState = EndScreen;
 		return;
 	}
 
 	if (gm.getBubblesList().size() == 0 && gm.getScreenBubblesList().size() == 0) {
 		printWin();
-		gameEnded = true;
+		//gameEnded = true;
+		gameState = EndScreen;
 		return;
 	}
 
@@ -57,7 +59,7 @@ void ofApp::draw() {
 }
 
 void ofApp::mousePressed(int x, int y, int button) {
-	if (gameEnded || !gameStarted) {
+	if (gameState == EndScreen || gameState == WelcomeScreen) {
 		return;
 	}
 
@@ -104,7 +106,7 @@ void ofApp::printWin() {
 	verdana.drawString(bubblesPopped,
 		PADDING,
 		PADDING + 3*FONT_SIZE);
-	verdana.drawString("Press the space-bar to try-again.",
+	verdana.drawString("Press the space-bar to play again.",
 		PADDING,
 		PADDING + 5*FONT_SIZE);
 }
@@ -133,31 +135,33 @@ void ofApp::printWelcomeScreen() {
 
 void ofApp::keyPressed(int key) {
 	//CONTROLING SPEED OF GAME
-	if (key == '1') {
-		speedFactor = 1;
-		ofBackground(255, 255, 0);
-	}
-	if (key == '2') {
-		speedFactor = 0.75;
-		ofBackground(0, 0, 255);
-	}
-	if (key == '3') {
-		speedFactor = 0.5;
-		ofBackground(255, 0, 0);
+	if (gameState == WelcomeScreen) {
+		if (key == '1') {
+			speedFactor = 1;
+			ofBackground(255, 255, 0);
+		}
+		if (key == '2') {
+			speedFactor = 0.75;
+			ofBackground(0, 0, 255);
+		}
+		if (key == '3') {
+			speedFactor = 0.5;
+			ofBackground(255, 0, 0);
+		}
 	}
 
 	//START GAME
-	if (key == OF_KEY_SPACE && !gameStarted) {
-		gameStarted = true;
+	if (key == OF_KEY_SPACE && gameState == WelcomeScreen) {
+		//gameStarted = true;
+		gameState = GameScreen;
 		loadJson();
 		startTime = ofGetElapsedTimef();
 		ofBackground(0, 0, 0);
 	}
 
 	//GO TO WELCOME SCREEN
-	if (key == OF_KEY_SPACE && gameEnded) {
-		gameStarted = false;
-		gameEnded = false;
+	if (key == OF_KEY_SPACE && gameState == EndScreen) {
+		gameState = WelcomeScreen;
 		setup();
 	}
 }
