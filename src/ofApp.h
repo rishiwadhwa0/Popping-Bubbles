@@ -25,6 +25,7 @@ class ofApp: public ofBaseApp
 	bool gameEnded = false;
 	bool gameStarted = false;
 	const int OF_KEY_SPACE = 32;
+	float speedFactor = 1;
 
 	public:
 		void setup();

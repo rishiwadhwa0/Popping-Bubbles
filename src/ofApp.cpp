@@ -117,9 +117,35 @@ void ofApp::printWelcomeScreen() {
 	verdana.drawString(WELCOME_MESSAGE2,
 		PADDING,
 		PADDING + 3*FONT_SIZE);
+	ofSetHexColor(0xffff00);
+	verdana.drawString("Press 1, for easy",
+		PADDING,
+		PADDING + 5*FONT_SIZE);
+	ofSetHexColor(0x0000FF);
+	verdana.drawString("Press 2, for medium",
+		PADDING,
+		PADDING + 7*FONT_SIZE);
+	ofSetHexColor(0xff0000);
+	verdana.drawString("Press 3, for hard",
+		PADDING,
+		PADDING + 9*FONT_SIZE);
 }
 
 void ofApp::keyPressed(int key) {
+	//CONTROLING SPEED OF GAME
+	if (key == '1') {
+		speedFactor = 1;
+		ofBackground(255, 255, 0);
+	}
+	if (key == '2') {
+		speedFactor = 0.75;
+		ofBackground(0, 0, 255);
+	}
+	if (key == '3') {
+		speedFactor = 0.5;
+		ofBackground(255, 0, 0);
+	}
+
 	//START GAME
 	if (key == OF_KEY_SPACE && !gameStarted) {
 		gameStarted = true;
@@ -156,7 +182,7 @@ void ofApp::loadJson() {
 		for (auto t : result["circles"][i]["times"]) {
 			int randomX = rand() % ofGetWidth();
 			int randomY = rand() % ofGetHeight();
-			float time = t.asFloat();
+			float time = t.asFloat() * speedFactor;
 			Bubble b(randomX, randomY, radius, color, time);
 			gm.addBubble(b);
 		}

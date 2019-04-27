@@ -23,6 +23,21 @@ Update: Apparently Visual Studio doesn't autodetect that you have changed direct
 -Circles are being drawn, but don't stay on the screen!
 Update: Discovered ofSetBackground(false) but still didn't work.
 Update: I believe I have discovered a real bug with OpenFrameworks. The setBackroundAuto shows a darkened screen with everything blacked out if you're displaying a fullscreen window. I have fixed this problem by displaying a 1000x1000 window.
-Update: My code moderator has told me I can use OF_GAME_MODE, but is still glitchy.
+Update: My code moderator has told me I can use OF_GAME_MODE, but is still glitchy. However, I can still re-size the window to fllscreen and the game works perfectly fine.
 
 -I couldn't find anything available to dynamically center font. Personally, I like the text in the top left anyways. 
+
+-I found it useful to put the if-conditionals to check if the game has or has not started/ended and return, so that the rest of the code is not indented. 
+Ex: 
+if (bad) {
+	return;
+}
+//rest of code
+
+instead of:
+
+if (not bad) {
+	//rest of code
+}
+
+-My friend who actually does game dev. told me to consider adding sond to my game, since that avoids awkward sildence. I think I will put sounds when a bubble comes up on the screen and when you pop the bubbles. 
