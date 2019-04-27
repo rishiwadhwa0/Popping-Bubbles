@@ -14,6 +14,14 @@ void ofApp::setup() {
 	verdana.setLineHeight(34.0f);
 	verdana.setLetterSpacing(1.035);
 
+	//sound setup
+	bubblePopped.load("popped.mp3");
+	backgroundMusic.load("background.mp3");
+	bubblePopped.setVolume(1);
+	backgroundMusic.setVolume(0.3);
+	backgroundMusic.play();
+	backgroundMusic.setLoop(true);
+
 	//setup new game data
 	gm.clearEverything();
 	numBubblesPopped = 0;
@@ -34,14 +42,12 @@ void ofApp::draw() {
 
 	if (gm.getScreenBubblesList().size() > MAX_SCREEN_BUBBLES) {
 		printGameOver();
-		//gameEnded = true;
 		gameState = EndScreen;
 		return;
 	}
 
 	if (gm.getBubblesList().size() == 0 && gm.getScreenBubblesList().size() == 0) {
 		printWin();
-		//gameEnded = true;
 		gameState = EndScreen;
 		return;
 	}
@@ -72,6 +78,7 @@ void ofApp::mousePressed(int x, int y, int button) {
 		if (std::abs(x - bX) <= bR && std::abs(y - bY) <= bR) {
 			ofSetColor(0,0,0);
 			ofDrawCircle(bubble.getX(), bubble.getY(), bubble.getRadius());
+			bubblePopped.play();
 			gm.removeAScreenBubble(i);
 			numBubblesPopped++;
 		}
@@ -152,7 +159,6 @@ void ofApp::keyPressed(int key) {
 
 	//START GAME
 	if (key == OF_KEY_SPACE && gameState == WelcomeScreen) {
-		//gameStarted = true;
 		gameState = GameScreen;
 		loadJson();
 		startTime = ofGetElapsedTimef();

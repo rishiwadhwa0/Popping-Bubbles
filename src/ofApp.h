@@ -24,11 +24,11 @@ class ofApp: public ofBaseApp
 	string const WELCOME_MESSAGE = "~BUBBLEZ~";
 	string const WELCOME_MESSAGE2 = "Press the space-bar to continue.";
 	int const PADDING = 15;
-	/*bool gameended = false;
-	bool gamestarted = false;*/
 	GameState gameState = WelcomeScreen;
 	const int OF_KEY_SPACE = 32;
 	float speedFactor = 1;
+	ofSoundPlayer bubblePopped;
+	ofSoundPlayer backgroundMusic;
 
 	public:
 		void setup();
