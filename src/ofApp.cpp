@@ -18,7 +18,7 @@ void ofApp::setup() {
 	bubblePopped.load("popped.mp3");
 	backgroundMusic.load("background.mp3");
 	bubblePopped.setVolume(1);
-	backgroundMusic.setVolume(0.3);
+	backgroundMusic.setVolume(0.15);
 	backgroundMusic.play();
 	backgroundMusic.setLoop(true);
 
@@ -37,6 +37,10 @@ void ofApp::draw() {
 
 	if (gameState == WelcomeScreen) {
 		printWelcomeScreen();
+		return;
+	}
+
+	if (gameState == ChooseGameScreen) {
 		return;
 	}
 
@@ -66,6 +70,18 @@ void ofApp::draw() {
 
 void ofApp::mousePressed(int x, int y, int button) {
 	if (gameState == EndScreen || gameState == WelcomeScreen) {
+		return;
+	}
+
+	if (gameState == ChooseGameScreen) {
+		if (x <= ofGetWidth()*(0.333)) {
+			ofBackground(255, 255, 0);
+		} else if (x >= ofGetWidth()*(0.333) && x <= ofGetWidth()*(0.667)) {
+			ofBackground(0, 0, 255);
+		} else if (x >= ofGetWidth()*(0.667) && x <= ofGetWidth()) {
+			ofBackground(255, 0, 0);
+		}
+		printChooseGameScreen();
 		return;
 	}
 
@@ -140,6 +156,25 @@ void ofApp::printWelcomeScreen() {
 		PADDING + 9*FONT_SIZE);
 }
 
+void ofApp::printChooseGameScreen() {
+	ofSetHexColor(0x00FF00);
+	verdana.drawString("Click on a length and press space-bar to start.",
+		PADDING,
+		PADDING + FONT_SIZE);
+	ofSetHexColor(0xffff00);
+	verdana.drawString("SHORT",
+		PADDING,
+		PADDING + 3*FONT_SIZE);
+	ofSetHexColor(0x0000FF);
+	verdana.drawString("NORMAL",
+		(ofGetWidth()*(0.333)) + PADDING,
+		PADDING + 3*FONT_SIZE);
+	ofSetHexColor(0xff0000);
+	verdana.drawString("LONG",
+		(ofGetWidth()*(0.667)) + PADDING,
+		PADDING + 3 * FONT_SIZE);
+}
+
 void ofApp::keyPressed(int key) {
 	//CONTROLING SPEED OF GAME
 	if (gameState == WelcomeScreen) {
@@ -157,12 +192,20 @@ void ofApp::keyPressed(int key) {
 		}
 	}
 
-	//START GAME
+	//Choose Difficulty
 	if (key == OF_KEY_SPACE && gameState == WelcomeScreen) {
-		gameState = GameScreen;
+		gameState = ChooseGameScreen;
+		ofBackground(0, 0, 0);
+		printChooseGameScreen();
+		return;
+	}
+
+	//Start Game
+	if (key == OF_KEY_SPACE && gameState == ChooseGameScreen) {
 		loadJson();
 		startTime = ofGetElapsedTimef();
 		ofBackground(0, 0, 0);
+		gameState = GameScreen;
 	}
 
 	//GO TO WELCOME SCREEN

@@ -8,7 +8,7 @@
 #include <vector> 
 #include <list>
 
-enum GameState { WelcomeScreen, GameScreen, EndScreen };
+enum GameState { WelcomeScreen, ChooseGameScreen, GameScreen, EndScreen };
 
 class ofApp: public ofBaseApp
 {
@@ -38,6 +38,7 @@ class ofApp: public ofBaseApp
 		void printGameOver();
 		void printWin();
 		void printWelcomeScreen();
+		void printChooseGameScreen();
 		void setUpParseJson();
 		void loadJson();
 };
