@@ -29,6 +29,7 @@ class ofApp: public ofBaseApp
 	float speedFactor = 1;
 	ofSoundPlayer bubblePopped;
 	ofSoundPlayer backgroundMusic;
+	string gameLength = "medium";
 
 	public:
 		void setup();

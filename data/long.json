@@ -1,0 +1,44 @@
+{
+  "circles": [
+    {
+      "radius": 50,
+      "color": 255,
+      "times": [ 1, 8, 9, 16 ]
+    },
+    {
+      "radius": 50,
+      "color": 100,
+      "times": [ 2, 7, 10, 15 ]
+    },
+    {
+      "radius": 50,
+      "color": 50,
+      "times": [ 3, 6, 11, 14 ]
+    },
+    {
+      "radius": 50,
+      "color": 125,
+      "times": [ 4, 5, 12, 13 ]
+    },
+    {
+      "radius": 50,
+      "color": 64,
+      "times": [ 17, 18, 19, 20 ]
+    },
+    {
+      "radius": 50,
+      "color": 255,
+      "times": [ 26, 27, 28, 30 ]
+    },
+    {
+      "radius": 50,
+      "color": 200,
+      "times": [ 21, 22, 23, 24 ]
+    },
+    {
+      "radius": 50,
+      "color": 135,
+      "times": [ 25, 29, 31, 32 ]
+    }
+  ]
+}

@@ -6,9 +6,6 @@
 #include <stdlib.h>
 
 void ofApp::setup() {
-	//json setup
-	setUpParseJson();
- 
 	//font setup
 	verdana.load("verdana.ttf", FONT_SIZE, true, true);
 	verdana.setLineHeight(34.0f);
@@ -76,10 +73,13 @@ void ofApp::mousePressed(int x, int y, int button) {
 	if (gameState == ChooseGameScreen) {
 		if (x <= ofGetWidth()*(0.333)) {
 			ofBackground(255, 255, 0);
+			gameLength = "short";
 		} else if (x >= ofGetWidth()*(0.333) && x <= ofGetWidth()*(0.667)) {
 			ofBackground(0, 0, 255);
+			gameLength = "medium";
 		} else if (x >= ofGetWidth()*(0.667) && x <= ofGetWidth()) {
 			ofBackground(255, 0, 0);
+			gameLength = "long";
 		}
 		printChooseGameScreen();
 		return;
@@ -202,6 +202,7 @@ void ofApp::keyPressed(int key) {
 
 	//Start Game
 	if (key == OF_KEY_SPACE && gameState == ChooseGameScreen) {
+		setUpParseJson();
 		loadJson();
 		startTime = ofGetElapsedTimef();
 		ofBackground(0, 0, 0);
@@ -216,7 +217,7 @@ void ofApp::keyPressed(int key) {
 }
 
 void ofApp::setUpParseJson() {
-	std::string file = "gameJSON.json";
+	std::string file = gameLength + ".json";
 	// Now parse the JSON
 	bool parsingSuccessful = result.open(file);
 	if (parsingSuccessful) {
